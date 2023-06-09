@@ -1,3 +1,3 @@
 # essd
 
-A simple tool to sign and verify (TODO) using [DSSE](https://dsse.dev).
+A simple tool to sign and verify using [DSSE](https://dsse.dev).

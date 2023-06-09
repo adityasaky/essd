@@ -3,8 +3,12 @@ package cmd
 import (
 	"os"
 
+	"github.com/secure-systems-lab/go-securesystemslib/dsse"
+	"github.com/secure-systems-lab/go-securesystemslib/signerverifier"
 	"github.com/spf13/cobra"
 )
+
+var keyType string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -24,4 +28,45 @@ func Execute() {
 func init() {
 	rootCmd.AddCommand(signCmd)
 	rootCmd.AddCommand(signEnvCmd)
+	rootCmd.AddCommand(verifyCmd)
+}
+
+func getSignerVerifier(signingKey string, signingKeyType string) (dsse.SignerVerifier, string, error) {
+	var signer dsse.SignerVerifier
+	switch signingKeyType {
+	case "rsa":
+		key, err := signerverifier.LoadRSAPSSKeyFromFile(signingKey)
+		if err != nil {
+			return nil, "", err
+		}
+		signer, err = signerverifier.NewRSAPSSSignerVerifierFromSSLibKey(key)
+		if err != nil {
+			return nil, "", err
+		}
+	case "ed25519":
+		key, err := signerverifier.LoadED25519KeyFromFile(signingKey)
+		if err != nil {
+			return nil, "", err
+		}
+		signer, err = signerverifier.NewED25519SignerVerifierFromSSLibKey(key)
+		if err != nil {
+			return nil, "", err
+		}
+	case "ecdsa":
+		key, err := signerverifier.LoadECDSAKeyFromFile(signingKey)
+		if err != nil {
+			return nil, "", err
+		}
+		signer, err = signerverifier.NewECDSASignerVerifierFromSSLibKey(key)
+		if err != nil {
+			return nil, "", err
+		}
+	}
+
+	keyID, err := signer.KeyID()
+	if err != nil {
+		return nil, "", err
+	}
+
+	return signer, keyID, nil
 }

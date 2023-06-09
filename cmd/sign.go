@@ -9,7 +9,6 @@ import (
 
 	"github.com/secure-systems-lab/go-securesystemslib/cjson"
 	"github.com/secure-systems-lab/go-securesystemslib/dsse"
-	"github.com/secure-systems-lab/go-securesystemslib/signerverifier"
 	"github.com/spf13/cobra"
 )
 
@@ -29,7 +28,6 @@ var signEnvCmd = &cobra.Command{
 
 var (
 	signingKey       string
-	signingKeyType   string
 	outputPath       string
 	canonicalizeJson bool
 	payloadType      string
@@ -46,7 +44,7 @@ func init() {
 	signCmd.MarkFlagRequired("key") //nolint:errcheck
 
 	signCmd.Flags().StringVarP(
-		&signingKeyType,
+		&keyType,
 		"key-type",
 		"t",
 		"rsa",
@@ -89,7 +87,7 @@ func init() {
 	signEnvCmd.MarkFlagRequired("key") //nolint:errcheck
 
 	signEnvCmd.Flags().StringVarP(
-		&signingKeyType,
+		&keyType,
 		"key-type",
 		"t",
 		"rsa",
@@ -123,7 +121,7 @@ func sign(cmd *cobra.Command, args []string) error {
 		payload = encodedBytes
 	}
 
-	signer, _, err := getSigner(signingKey, signingKeyType)
+	signer, _, err := getSignerVerifier(signingKey, keyType)
 	if err != nil {
 		return err
 	}
@@ -163,7 +161,7 @@ func signEnvelope(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	signer, keyID, err := getSigner(signingKey, signingKeyType)
+	signer, keyID, err := getSignerVerifier(signingKey, keyType)
 	if err != nil {
 		return err
 	}
@@ -185,44 +183,4 @@ func signEnvelope(cmd *cobra.Command, args []string) error {
 	}
 
 	return os.WriteFile(outputPath, envBytes, 0644)
-}
-
-func getSigner(signingKey string, signingKeyType string) (dsse.SignerVerifier, string, error) {
-	var signer dsse.SignerVerifier
-	switch signingKeyType {
-	case "rsa":
-		key, err := signerverifier.LoadRSAPSSKeyFromFile(signingKey)
-		if err != nil {
-			return nil, "", err
-		}
-		signer, err = signerverifier.NewRSAPSSSignerVerifierFromSSLibKey(key)
-		if err != nil {
-			return nil, "", err
-		}
-	case "ed25519":
-		key, err := signerverifier.LoadED25519KeyFromFile(signingKey)
-		if err != nil {
-			return nil, "", err
-		}
-		signer, err = signerverifier.NewED25519SignerVerifierFromSSLibKey(key)
-		if err != nil {
-			return nil, "", err
-		}
-	case "ecdsa":
-		key, err := signerverifier.LoadECDSAKeyFromFile(signingKey)
-		if err != nil {
-			return nil, "", err
-		}
-		signer, err = signerverifier.NewECDSASignerVerifierFromSSLibKey(key)
-		if err != nil {
-			return nil, "", err
-		}
-	}
-
-	keyID, err := signer.KeyID()
-	if err != nil {
-		return nil, "", err
-	}
-
-	return signer, keyID, nil
 }
