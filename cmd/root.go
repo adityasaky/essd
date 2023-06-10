@@ -29,6 +29,7 @@ func init() {
 	rootCmd.AddCommand(signCmd)
 	rootCmd.AddCommand(signEnvCmd)
 	rootCmd.AddCommand(verifyCmd)
+	rootCmd.AddCommand(catCmd)
 }
 
 func getSignerVerifier(signingKey string, signingKeyType string) (dsse.SignerVerifier, string, error) {
