@@ -1,7 +1,15 @@
 package main
 
-import "github.com/adityasaky/essd/cmd"
+import (
+	"os"
+
+	"github.com/adityasaky/essd/internal/cmd"
+)
 
 func main() {
-	cmd.Execute()
+	rootCmd := cmd.New()
+	err := rootCmd.Execute()
+	if err != nil {
+		os.Exit(1)
+	}
 }
