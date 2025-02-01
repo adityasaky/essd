@@ -124,10 +124,11 @@ func (o *options) printPayloadType(args []string) error {
 func New() *cobra.Command {
 	o := &options{}
 	cmd := &cobra.Command{
-		Use:   "cat",
-		Short: "Concatenate specified parts of DSSE envelope",
-		Args:  cobra.MinimumNArgs(1),
-		RunE:  o.Run,
+		Use:               "cat",
+		Short:             "Concatenate specified parts of DSSE envelope",
+		Args:              cobra.MinimumNArgs(1),
+		RunE:              o.Run,
+		DisableAutoGenTag: true,
 	}
 	o.AddFlags(cmd)
 

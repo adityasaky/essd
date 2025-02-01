@@ -206,10 +206,11 @@ func (o *options) getSigner() (dsse.Signer, error) {
 func New() *cobra.Command {
 	o := &options{}
 	cmd := &cobra.Command{
-		Use:   "sign",
-		Short: "Create signed DSSE envelope for an arbitrary payload",
-		Args:  cobra.ExactArgs(1),
-		RunE:  o.Run,
+		Use:               "sign",
+		Short:             "Create signed DSSE envelope for an arbitrary payload",
+		Args:              cobra.ExactArgs(1),
+		RunE:              o.Run,
+		DisableAutoGenTag: true,
 	}
 	o.AddFlags(cmd)
 
