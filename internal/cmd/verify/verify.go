@@ -82,10 +82,11 @@ func (o *options) getVerifiers() ([]dsse.Verifier, error) {
 func New() *cobra.Command {
 	o := &options{}
 	cmd := &cobra.Command{
-		Use:   "verify",
-		Short: "Verify signatures in DSSE envelope using specified keys",
-		Args:  cobra.MinimumNArgs(1),
-		RunE:  o.Run,
+		Use:               "verify",
+		Short:             "Verify signatures in DSSE envelope using specified keys",
+		Args:              cobra.MinimumNArgs(1),
+		RunE:              o.Run,
+		DisableAutoGenTag: true,
 	}
 	o.AddFlags(cmd)
 

@@ -9,8 +9,9 @@ import (
 
 func New() *cobra.Command {
 	rootCmd := &cobra.Command{
-		Use:   "essd",
-		Short: "A tool to sign, verify, and inspect DSSE envelopes",
+		Use:               "essd",
+		Short:             "A tool to sign, verify, and inspect DSSE envelopes",
+		DisableAutoGenTag: true,
 	}
 
 	rootCmd.AddCommand(cat.New())

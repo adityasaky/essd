@@ -9,4 +9,22 @@ updates:
       prefix: "chore"
       include: "scope"
     open-pull-requests-limit: 10
-
+    groups:
+      all:
+        applies-to: version-updates
+        patterns:
+          - "*"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "14:00"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    open-pull-requests-limit: 10
+    groups:
+      all:
+        applies-to: version-updates
+        patterns:
+          - "*"
