@@ -12,7 +12,7 @@ require (
 	github.com/sigstore/sigstore-go v0.7.0
 	github.com/spf13/cobra v1.8.1
 	golang.org/x/crypto v0.32.0
-	google.golang.org/protobuf v1.36.4
+	google.golang.org/protobuf v1.36.5
 )
 
 require (
