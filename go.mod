@@ -8,7 +8,7 @@ require (
 	github.com/hiddeco/sshsig v0.1.0
 	github.com/secure-systems-lab/go-securesystemslib v0.9.0
 	github.com/sigstore/protobuf-specs v0.4.0
-	github.com/sigstore/sigstore v1.8.12
+	github.com/sigstore/sigstore v1.8.14
 	github.com/sigstore/sigstore-go v0.7.0
 	github.com/spf13/cobra v1.8.1
 	golang.org/x/crypto v0.33.0
