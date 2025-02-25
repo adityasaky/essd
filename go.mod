@@ -1,7 +1,6 @@
 module github.com/adityasaky/essd
 
 go 1.22.0
-
 toolchain go1.23.5
 
 require (
@@ -11,7 +10,7 @@ require (
 	github.com/sigstore/sigstore v1.8.15
 	github.com/sigstore/sigstore-go v0.7.0
 	github.com/spf13/cobra v1.9.1
-	golang.org/x/crypto v0.33.0
+	golang.org/x/crypto v0.35.0
 	google.golang.org/protobuf v1.36.5
 )
 
