@@ -1,7 +1,6 @@
 module github.com/adityasaky/essd
 
-go 1.22.0
-toolchain go1.23.5
+go 1.23.0
 
 require (
 	github.com/hiddeco/sshsig v0.1.0
