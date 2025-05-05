@@ -9,10 +9,11 @@ essd cat [flags]
 ### Options
 
 ```
-  -h, --help           help for cat
-  -p, --payload        envelope payload
-  -t, --payload-type   envelope's payload type
-      --summary        summary of envelope
+  -d, --decode-base64   base64 decode payload
+  -h, --help            help for cat
+  -p, --payload         envelope payload
+  -t, --payload-type    envelope's payload type
+      --summary         summary of envelope
 ```
 
 ### SEE ALSO
