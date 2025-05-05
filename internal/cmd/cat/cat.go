@@ -13,6 +13,8 @@ type options struct {
 	summaryOnly     bool
 	payloadOnly     bool
 	payloadTypeOnly bool
+
+	decodeBase64 bool
 }
 
 func (o *options) AddFlags(cmd *cobra.Command) {
@@ -40,14 +42,26 @@ func (o *options) AddFlags(cmd *cobra.Command) {
 	)
 
 	cmd.MarkFlagsMutuallyExclusive("summary", "payload", "payload-type")
+
+	cmd.Flags().BoolVarP(
+		&o.decodeBase64,
+		"decode-base64",
+		"d",
+		false,
+		"base64 decode payload",
+	)
 }
 
 func (o *options) Run(_ *cobra.Command, args []string) error {
+	if o.decodeBase64 && !o.payloadOnly {
+		return fmt.Errorf("--decode-base64 can only be used with --payload")
+	}
+
 	switch {
 	case o.summaryOnly:
 		return o.printSummary(args)
 	case o.payloadOnly:
-		return o.printPayload(args)
+		return o.printPayload(args, o.decodeBase64)
 	case o.payloadTypeOnly:
 		return o.printPayloadType(args)
 	default:
@@ -90,7 +104,7 @@ func (o *options) printSummary(args []string) error {
 	return nil
 }
 
-func (o *options) printPayload(args []string) error {
+func (o *options) printPayload(args []string, decodeBase64 bool) error {
 	for _, envPath := range args {
 		envBytes, err := os.ReadFile(envPath)
 		if err != nil {
@@ -100,7 +114,15 @@ func (o *options) printPayload(args []string) error {
 		if err := json.Unmarshal(envBytes, env); err != nil {
 			return err
 		}
-		fmt.Println(env.Payload)
+		if decodeBase64 {
+			decodedBytes, err := env.DecodeB64Payload()
+			if err != nil {
+				return fmt.Errorf("unable to decode base64 encoded payload")
+			}
+			fmt.Println(string(decodedBytes))
+		} else {
+			fmt.Println(env.Payload)
+		}
 	}
 	return nil
 }
