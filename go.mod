@@ -9,7 +9,7 @@ require (
 	github.com/sigstore/sigstore v1.9.4
 	github.com/sigstore/sigstore-go v0.7.2
 	github.com/spf13/cobra v1.9.1
-	golang.org/x/crypto v0.37.0
+	golang.org/x/crypto v0.38.0
 	google.golang.org/protobuf v1.36.6
 )
 
@@ -84,10 +84,10 @@ require (
 	golang.org/x/mod v0.24.0 // indirect
 	golang.org/x/net v0.38.0 // indirect
 	golang.org/x/oauth2 v0.29.0 // indirect
-	golang.org/x/sync v0.13.0 // indirect
-	golang.org/x/sys v0.32.0 // indirect
-	golang.org/x/term v0.31.0 // indirect
-	golang.org/x/text v0.24.0 // indirect
+	golang.org/x/sync v0.14.0 // indirect
+	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/term v0.32.0 // indirect
+	golang.org/x/text v0.25.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20250303144028-a0af3efb3deb // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
