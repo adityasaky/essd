@@ -5,7 +5,7 @@ go 1.23.0
 require (
 	github.com/hiddeco/sshsig v0.2.0
 	github.com/secure-systems-lab/go-securesystemslib v0.9.0
-	github.com/sigstore/protobuf-specs v0.4.1
+	github.com/sigstore/protobuf-specs v0.4.2
 	github.com/sigstore/sigstore v1.9.4
 	github.com/sigstore/sigstore-go v1.0.0
 	github.com/spf13/cobra v1.9.1
