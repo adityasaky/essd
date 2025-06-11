@@ -6,7 +6,7 @@ require (
 	github.com/hiddeco/sshsig v0.2.0
 	github.com/secure-systems-lab/go-securesystemslib v0.9.0
 	github.com/sigstore/protobuf-specs v0.4.3
-	github.com/sigstore/sigstore v1.9.4
+	github.com/sigstore/sigstore v1.9.5
 	github.com/sigstore/sigstore-go v1.0.0
 	github.com/spf13/cobra v1.9.1
 	golang.org/x/crypto v0.39.0
@@ -84,7 +84,7 @@ require (
 	golang.org/x/exp v0.0.0-20240531132922-fd00a4e0eefc // indirect
 	golang.org/x/mod v0.25.0 // indirect
 	golang.org/x/net v0.40.0 // indirect
-	golang.org/x/oauth2 v0.29.0 // indirect
+	golang.org/x/oauth2 v0.30.0 // indirect
 	golang.org/x/sync v0.15.0 // indirect
 	golang.org/x/sys v0.33.0 // indirect
 	golang.org/x/term v0.32.0 // indirect
